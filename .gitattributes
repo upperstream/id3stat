@@ -1,0 +1,11 @@
+*.go	text	eol=lf
+*.xml	text	eol=lf
+*.txt	text	eol=lf
+*.md	text	eol=lf
+*.mdown	text	eol=lf
+*.prefs	text	eol=lf
+.gitattributes		text	eol=lf
+.gitignore	text	eol=lf
+.project	text	eol=lf
+*.bat	text	eol=crlf
+*.sh	text	eol=lf
