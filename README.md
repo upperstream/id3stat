@@ -24,7 +24,7 @@ The `-L` flag indicates to display a licensing notice.  The `-V` flag
 indicates to display the version number of `id3stat`.  The `-H` flag
 indicates to display the usage help.
 
-## Limination
+## Limitation
 
 By the original requirement, `id3stat` only supports ID3v1 tag.
 
