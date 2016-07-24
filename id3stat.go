@@ -37,6 +37,7 @@ var licenceFlag = flag.Bool("L", false, "Print the licencing notice.")
 var filesFlag = flag.String("files", "", "Provides a list of files to process.")
 var encodingFlag = flag.String("encoding", "UTF-8",
 	"Encoding of a file that -files flag provides.")
+var dirFlag = flag.String("dir", "", "Specifies the directory to test files in.")
 
 type id3Error struct {
 	Path string
@@ -53,8 +54,14 @@ func main() {
 	parseFlagsAndExit()
 
 	var files []string
-	if len(*filesFlag) > 0 {
-		var err error
+	var err error
+	if len(*dirFlag) > 0 {
+		files, err = listFilesIn(*dirFlag)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err.Error())
+			os.Exit(1)
+		}
+	} else if len(*filesFlag) > 0 {
 		files, err = parseListFile(*filesFlag, *encodingFlag)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err.Error())
@@ -69,6 +76,71 @@ func main() {
 	} else {
 		os.Exit(0)
 	}
+}
+
+func listFilesIn(dirname string) ([]string, error) {
+	stat1, err1 := os.Stat(dirname)
+	if err1 != nil {
+		return nil, err1
+	}
+	if !stat1.IsDir() {
+		return nil, fmt.Errorf("Not a directory: %s", dirname)
+	}
+	_, files, err2 := traverse(append(make([]string, 0, 128), *dirFlag), make([]string, 0, 128))
+	if err2 != nil {
+		return nil, err2
+	}
+	return files, nil
+}
+
+func traverse(directories []string, acc []string) (dirs []string, files []string, err error) {
+	var dirs2 []string
+	var files2 []string
+	dirs = make([]string, 0, 128)
+	files = acc
+	for _, dir := range directories {
+		dirs2, files2, _ = readdir(dir)
+		dirs = append(dirs, dirs2...)
+		files = append(files, files2...)
+	}
+	if len(dirs) > 0 {
+		return traverse(dirs, files)
+	}
+	return dirs, files, nil
+}
+
+func readdir(dirname string) (dirs []string, files []string, err error) {
+	var d *os.File
+	d, err = os.Open(dirname)
+	if err != nil {
+		return nil, nil, err
+	}
+	defer func(name string) {
+		d.Close()
+	}(dirname)
+	dirs = make([]string, 0, 128)
+	files = make([]string, 0, 128)
+	names, err2 := d.Readdirnames(0)
+	if err2 != nil {
+		return nil, nil, err2
+	}
+	for _, name := range names {
+		var stat os.FileInfo
+		var err3 error
+		path := filepath.Join(dirname, name)
+		stat, err3 = os.Stat(path)
+		if err3 != nil {
+			return dirs, files, err3
+		}
+		if stat.IsDir() {
+			dirs = append(dirs, path)
+		} else {
+			if strings.EqualFold(filepath.Ext(path), ".mp3") == true {
+				files = append(files, path)
+			}
+		}
+	}
+	return dirs, files, nil
 }
 
 func parseFlagsAndExit() {
@@ -90,6 +162,19 @@ func parseFlagsAndExit() {
 		os.Exit(2)
 	}
 
+	if len(*filesFlag) > 0 && len(*dirFlag) > 0 {
+		fmt.Fprintf(os.Stderr, "You cannot specify --files and --dir at the same time\n\n")
+		printUsage()
+		os.Exit(2)
+	}
+
+	if len(*dirFlag) > 0 && flag.NArg() > 0 {
+		fmt.Fprintf(os.Stderr,
+			"You cannot specify command line arguments when you provide --dir option.\n\n")
+		printUsage()
+		os.Exit(2)
+	}
+
 	if len(*filesFlag) > 0 && flag.NArg() > 0 {
 		fmt.Fprintf(os.Stderr,
 			"You cannot specify command line arguments when you provide --files option.\n\n")
@@ -97,7 +182,7 @@ func parseFlagsAndExit() {
 		os.Exit(2)
 	}
 
-	if len(*filesFlag) == 0 && flag.NArg() == 0 {
+	if len(*dirFlag) == 0 && len(*filesFlag) == 0 && flag.NArg() == 0 {
 		printUsage()
 		os.Exit(2)
 	}
