@@ -34,7 +34,6 @@ const appVersion = "0.0.1"
 
 var versionFlag = flag.Bool("V", false, "Print the version number.")
 var licenceFlag = flag.Bool("L", false, "Print the licencing notice.")
-var helpFlag = flag.Bool("H", false, "Print this message.")
 var filesFlag = flag.String("files", "", "Provides a list of files to process.")
 var encodingFlag = flag.String("encoding", "UTF-8",
 	"Encoding of a file that -files flag provides.")
@@ -51,45 +50,17 @@ func (e id3Error) Error() string {
 }
 
 func main() {
-	flag.Parse()
-
-	if *versionFlag {
-		fmt.Println("Version:", appVersion)
-		return
-	}
-	if *licenceFlag {
-		printLicence()
-		return
-	}
-	if *helpFlag {
-		flag.Usage()
-		os.Exit(2)
-		return
-	}
-	if err := validateEncodingFlag(*encodingFlag); err != nil {
-		fmt.Fprintln(os.Stderr, err.Error())
-		os.Exit(1)
-	}
+	parseFlagsAndExit()
 
 	var files []string
-	var err error
 	if len(*filesFlag) > 0 {
-		if flag.NArg() > 0 {
-			fmt.Fprintf(os.Stderr,
-				"You cannot specify command line arguments when you provide --files option.\n\n")
-			printUsage()
-			os.Exit(2)
-		}
+		var err error
 		files, err = parseListFile(*filesFlag, *encodingFlag)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err.Error())
 			os.Exit(1)
 		}
 	} else {
-		if flag.NArg() == 0 {
-			printUsage()
-			os.Exit(2)
-		}
 		files = os.Args[len(os.Args)-flag.NArg() : len(os.Args)]
 	}
 	nSuccess, _ := getFileStatuses(files)
@@ -100,10 +71,44 @@ func main() {
 	}
 }
 
+func parseFlagsAndExit() {
+	flag.Usage = printUsage
+	flag.Parse()
+
+	if *versionFlag {
+		fmt.Println("Version:", appVersion)
+		os.Exit(0)
+	}
+
+	if *licenceFlag {
+		printLicence()
+		os.Exit(0)
+	}
+
+	if err := validateEncodingFlag(*encodingFlag); err != nil {
+		fmt.Fprintln(os.Stderr, err.Error())
+		os.Exit(2)
+	}
+
+	if len(*filesFlag) > 0 && flag.NArg() > 0 {
+		fmt.Fprintf(os.Stderr,
+			"You cannot specify command line arguments when you provide --files option.\n\n")
+		printUsage()
+		os.Exit(2)
+	}
+
+	if len(*filesFlag) == 0 && flag.NArg() == 0 {
+		printUsage()
+		os.Exit(2)
+	}
+}
+
 func printUsage() {
-	fmt.Println(os.Args[0], "mp3file [...]")
-	fmt.Println(os.Args[0], "--files=<list> --encoding=<encoding>")
-	fmt.Println(os.Args[0], "-H | -L | -V")
+	executable := filepath.Base(os.Args[0])
+	fmt.Fprintf(os.Stderr, "Usage of %s:\n", executable)
+	fmt.Fprintln(os.Stderr, executable, "mp3file [...]")
+	fmt.Fprintln(os.Stderr, executable, "--files=<list> --encoding=<encoding>")
+	fmt.Fprintln(os.Stderr, executable, "-H | -L | -V")
 	flag.PrintDefaults()
 }
 
