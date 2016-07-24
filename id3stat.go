@@ -30,7 +30,7 @@ import (
 	"golang.org/x/text/transform"
 )
 
-const appVersion = "0.0.1"
+const appVersion = "0.1.0"
 
 var versionFlag = flag.Bool("V", false, "Print the version number.")
 var licenceFlag = flag.Bool("L", false, "Print the licencing notice.")
