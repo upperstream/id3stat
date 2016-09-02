@@ -2,7 +2,7 @@
 
 ## Summary
 
-Checks is a proper ID3 tag is added to the specified MP3 file.
+Checks if a proper ID3 tag is added to the specified MP3 file.
 
 ## Motivation
 
