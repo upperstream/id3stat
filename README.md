@@ -14,7 +14,7 @@ a tool to test and report if an MP3 file has an ID3v1 tag.
 
     id3stat mp3file [...]
     id3stat --files=<list> --encoding=<encoding>
-    id3stat --dir=<directroy>
+    id3stat --dir=<directory>
     id3stat -L
     id3stat -V
     id3stat -H
