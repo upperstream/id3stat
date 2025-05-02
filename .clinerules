@@ -1,0 +1,39 @@
+# Rules for cline
+
+## Memory Bank
+
+Read @/.memory_bank.md to set up Memory Bank for this project.
+Regardless of the memory bank state, you must always respect the rules
+in the following sections in this document.
+
+## Rules of Engagement
+
+* When you are caught in a loop, suspend the on-going task and raise
+  your hand early, so that I can break the complex task down into steps
+  before spending tokens.
+* Consider splitting source files when a production source file reaches
+  980 lines or when a test source file reaches 480 lines.  Avoid each
+  reaches 1000 lines and 500 lines respectively.
+
+## Documentation
+
+When modifying any implementation, update the `README.md` document,
+manual pages, and `CHANGELOG.md` to reflect the changes.
+
+## Text file standards
+
+* Use "Typewriter spacing" style (two spaces after full stop) except
+  for manual pages.  If such a full stop character appears at the end
+  of a line, this is not applied.
+* Prefer British spelling over American spelling except for proper
+  nouns.
+* Lines should be wrapped at 72 characters (never exceed 72 characters
+  unless the line is preformatted).  Trailing punctuation may appear
+  after the 72-character limit if necessary.
+
+### Special notes for Markdown formatting
+
+These rules should be always respected:
+
+* Headings should be surrounded by blank lines (MD022)
+* Lists should be surrounded by blank lines (MD032)

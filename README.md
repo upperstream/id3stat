@@ -19,19 +19,20 @@ a tool to test and report if an MP3 file has an ID3v1 tag.
     id3stat -V
     id3stat -H
 
-The first syntax checks if a specified MP3 file has an ID3v1 tag and prints
-the file name if the file has no ID3v1 tag.  Two or more files can be
-specified.
+The first syntax checks if a specified MP3 file has an ID3v1 tag and
+prints the file name if the file has no ID3v1 tag.  Two or more files
+can be specified.
 
-The second syntax gives a list of files to test, with specifying the encoding
-of the content of the list file.  The _list_ parameter specifies the file
-name of a text file consisting lines that have an MP3 file name on each.
-The _encoding_ parameter is the encoding of the list file itself, neither
-the encoding of MP3 files nor of MP3 file names on the file system.
-Currently `UTF-8` (default) and `ShiftJIS` are supported.
+The second syntax gives a list of files to test, with specifying the
+encoding of the content of the list file.  The _list_ parameter
+specifies the file name of a text file consisting lines that have an
+MP3 file name on each.  The _encoding_ parameter is the encoding of the
+list file itself, neither the encoding of MP3 files nor of MP3 file
+names on the file system.  Currently `UTF-8` (default) and `ShiftJIS`
+are supported.
 
-The third syntax gives a _directory_ to test files in.  All MP3 files are
-tested in this directory and descendants.
+The third syntax gives a _directory_ to test files in.  All MP3 files
+are tested in this directory and descendants.
 
 The `-L` flag indicates to display a licensing notice.  The `-V` flag
 indicates to display the version number of `id3stat`.  The `-H` flag
@@ -57,6 +58,7 @@ file for details.
               golang.org/x/text/transform
     go build github.com/upperstream/id3stat
 
-When you modify `NOTICE.txt`, you have to execute `go generate` so that `notice.go` gets updated:
+When you modify `NOTICE.txt`, you have to execute `go generate` so that
+`notice.go` gets updated:
 
     go generate github.com/upperstream/id3stat
