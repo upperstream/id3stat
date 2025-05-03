@@ -3,6 +3,7 @@
 ## [Unreleased][]
 
 * Added
+  * GitHub Actions workflow to run tests automatically on code push
   * Comprehensive memory bank documentation
   * Expanded project scope beyond initial SatNav/Player requirement
   * Detailed project documentation in memory bank
