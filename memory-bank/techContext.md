@@ -12,10 +12,17 @@
 
 ### Toolchain
 
-- Go 1.6+
+- Go 1.11+
 - Go Modules for dependency management
 - golangci-lint for static code analysis
 - GoTest for unit and integration testing
+
+### Dev Container
+
+- Debian Bullseye slim base image
+- Go 1.11.13 pre-installed
+- Git, SSH client, and build tools included
+- Configured for VS Code Remote Development
 
 ## Dependencies
 
@@ -28,8 +35,8 @@
 
 ### External Libraries
 
-- No external dependencies planned
-- Self-contained implementation
+- github.com/dhowden/tag - For tag parsing
+- golang.org/x/text - For text encoding support
 
 ## Build and Deployment
 

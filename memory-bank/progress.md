@@ -3,7 +3,7 @@
 ## Project Status
 
 - **Current Phase**: Initial Setup
-- **Overall Progress**: 10%
+- **Overall Progress**: 25%
 
 ## Completed Tasks
 
@@ -18,7 +18,7 @@
 - [x] Implement core parsing logic
 - [x] Develop version detection mechanism
 - [x] Create metadata extraction module
-- [ ] Introduction of Dev Container environment
+- [x] Introduction of Dev Container environment
 - [ ] Introduction of lint for Go language
 - [ ] Write comprehensive test suite
 
@@ -34,9 +34,9 @@
 - [x] Batch processing support
 - [x] Error handling and validation
 
-### Milestone 3: Introduction of Dev Container environment (0/1)
+### Milestone 3: Introduction of Dev Container environment (1/1)
 
-- [ ] Introduce Dev Container with Golang v1.6
+- [x] Introduce Dev Container with Golang v1.11.13
 
 ### Milestone 4: Testing and Quality (0/3)
 
@@ -74,12 +74,12 @@
   - Batch processing capabilities
   - Stable release with comprehensive testing
 - v0.2.0:
-  - Introduction of Dev Container with Golang v1.6
+  - Introduction of Dev Container with Golang v1.11.13
   - Introduction of lint tool
   - Introduction of Unit test
   - Introduction of Integration test
 - v0.3.0: Migrate to Golang 1.22
-- v0.2.0: Migrate to Golang 1.24
+- v0.4.0: Migrate to Golang 1.24
 
 ## Performance Goals
 

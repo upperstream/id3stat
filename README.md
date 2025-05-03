@@ -42,6 +42,17 @@ indicates to display the usage help.
 
 By the original requirement, `id3stat` supports ID3v1 tag only.
 
+## Dev Container
+
+To use the Dev Container environment, follow these steps:
+
+1. Open the project in VS Code.
+2. Install the Remote - Containers extension if not already installed.
+3. Reopen the project in the container by selecting "Reopen in
+   Container" from the command palette.
+4. The Go environment with version 1.11 is now set up, and the necessary
+   tools are installed.
+
 ## Licensing
 
 This tool is licensed under the
@@ -51,12 +62,8 @@ file for details.
 
 ## How to build
 
-    cd $(GOPATH)/src
-    go get -u github.com/dhowden/tag \
-              golang.org/x/text/encoding \
-              golang.org/x/text/encoding/japanese \
-              golang.org/x/text/transform
-    go build github.com/upperstream/id3stat
+    cd $PROJECT_DIR # Where PROJECT_DIR points to the directory this file is in
+    go build
 
 When you modify `NOTICE.txt`, you have to execute `go generate` so that
 `notice.go` gets updated:
