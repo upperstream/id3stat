@@ -29,19 +29,23 @@ func createTestMP3WithID3v1Tag(t *testing.T) string {
 	}
 	defer tmpfile.Close()
 
-	header := []byte("ID3")
-	if _, err := tmpfile.Write(header); err != nil {
+	dummyData := make([]byte, 1024)
+	if _, err := tmpfile.Write(dummyData); err != nil {
 		t.Fatal(err)
 	}
-
-	if _, err := tmpfile.Seek(128, os.SEEK_SET); err != nil {
-		t.Fatal(err)
+	
+	tagData := make([]byte, 128)
+	
+	copy(tagData[0:3], []byte("TAG"))
+	
+	for i := 3; i < 128; i++ {
+		tagData[i] = ' '
 	}
-
-	tagData := []byte("TAG" + "Title                          " +
-		"Artist                         " +
-		"Album                          " +
-		"2023" + "Comment                         " + "\x00")
+	
+	if len(tagData) != 128 {
+		t.Fatalf("ID3v1 tag must be exactly 128 bytes, got %d bytes", len(tagData))
+	}
+	
 	if _, err := tmpfile.Write(tagData); err != nil {
 		t.Fatal(err)
 	}
