@@ -16,6 +16,8 @@
   * Updated documentation in README.md with Dev Container usage instructions
   * Updated memory bank files to reflect Dev Container introduction
   * Updated techContext.md with Dev Container details and external dependencies
+  * Upgraded Go environment from Go 1.11.13 to Go 1.22.3
+  * Updated dependencies to their latest compatible versions
 
 ## [v0.1.0][] - Initial release
 

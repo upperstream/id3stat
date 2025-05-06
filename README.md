@@ -50,7 +50,7 @@ To use the Dev Container environment, follow these steps:
 2. Install the Remote - Containers extension if not already installed.
 3. Reopen the project in the container by selecting "Reopen in
    Container" from the command palette.
-4. The Go environment with version 1.11 is now set up, and the necessary
+4. The Go environment with version 1.22 is now set up, and the necessary
    tools are installed.
 
 ## Licensing
