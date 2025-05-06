@@ -274,5 +274,5 @@ func parseListFile(listfile string, encoding string) (files []string, err error)
 }
 
 func printLicence() {
-	fmt.Println(NOTICE)
+	fmt.Print(NOTICE)
 }

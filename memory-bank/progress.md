@@ -47,9 +47,9 @@
 
 ### Milestone 5: Migrate to Golang version 1.22
 
-- [ ] Introduce go.mod to the project in order to track the target
+- [x] Introduce go.mod to the project in order to track the target
   Golang version
-- [ ] Migrate the project to Golang version 1.22
+- [x] Migrate the project to Golang version 1.22
 
 ### Milestone 6: Migrate to Golang version 1.24
 

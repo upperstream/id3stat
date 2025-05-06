@@ -12,7 +12,7 @@
 
 ### Toolchain
 
-- Go 1.11+
+- Go 1.22+
 - Go Modules for dependency management
 - golangci-lint for static code analysis
 - GoTest for unit and integration testing
@@ -20,7 +20,7 @@
 ### Dev Container
 
 - Debian Bullseye slim base image
-- Go 1.11.13 pre-installed
+- Go 1.22.3 pre-installed
 - Git, SSH client, and build tools included
 - Configured for VS Code Remote Development
 

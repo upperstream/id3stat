@@ -19,7 +19,7 @@
 
 1. Introduce lint for Go language
 2. Implement comprehensive test suite
-3. Plan migration to Go 1.22 and later 1.24
+3. Plan migration to Go 1.24
 4. Complete remaining milestones in progress.md
 
 ## Active Decisions
@@ -36,7 +36,7 @@
 - 72-character line wrapping
 - Typewriter spacing (two spaces after full stop)
 - Markdown linting rules applied
-- Go 1.11.13 as current development version
+- Go 1.22.3 as current development version
 
 ## Current Challenges
 
